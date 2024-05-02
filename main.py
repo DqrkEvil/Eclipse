@@ -15,6 +15,8 @@ def main():
     
     # Applying protection methods
     fileContents = encode.b64Encoding(fileContents)
+    
+    fileContents = cmp.lzmaCompress(fileContents)
         
         # Creating new file with protections applied
     with open("protectedFile.py", "w") as protectedFile:
