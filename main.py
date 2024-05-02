@@ -6,7 +6,7 @@ import random
 
 def main():
     # Settings
-    originalFile = "test/HelloWorld.py"
+    originalFile = sys.argv[1]
     
     # Read the contents of the file
     with open(originalFile, "rb") as originalFile:
@@ -27,7 +27,7 @@ def main():
         fileContents = method(fileContents)
         
             # Creating new file with protections applied
-        with open(f"tempFile{n}.py", "w") as protectedFile:
+        with open(f"tempFiles/tempFile{n}.py", "w") as protectedFile:
             protectedFile.write(fileContents)
             protectedFile.truncate()
         
