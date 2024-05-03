@@ -3,25 +3,38 @@ import random
 import sys
 from pathlib import Path
 
+import src.obfuscation.checksum as check
 import src.obfuscation.compress as cmp
 import src.obfuscation.encode as encode
 
 
+def debugDump(fileContents: str) -> None:
+    if not debugFlag:
+        return
+    
+    # Create folder for debug files
+    folderPath = r"debug" 
+    debugNum = 0
+
+    if not os.path.exists(folderPath):
+        os.makedirs(folderPath)
+    
+    else:
+        # Get the number of files in the folder
+        debugNum = len(os.listdir(folderPath))
+        
+    # Creating temp files for debug purposes 
+    with open(f"debug/debugFile{debugNum}.py", "w") as protectedFile:
+        protectedFile.write(fileContents)
+        protectedFile.truncate()
+
 def applyMethods(protectionMethods: list, fileContents: str) -> str:
     random.shuffle(protectionMethods)
     
-    for n, method in enumerate(protectionMethods):
+    for method in protectionMethods:
         fileContents = method(fileContents)
-        
-        # Create folder for debug files
-        folderPath = r"debug" 
-        if not os.path.exists(folderPath):
-            os.makedirs(folderPath)
-            
-        # Creating temp files for debug purposes 
-        with open(f"debug/debugFile{n}.py", "w") as protectedFile:
-            protectedFile.write(fileContents)
-            protectedFile.truncate()
+
+        debugDump(fileContents)
     
     return fileContents
 
@@ -29,6 +42,9 @@ def main():
     # Argument receiver from terminal  
     filePath = sys.argv[1]
     fileName = Path(filePath).stem
+    
+    global debugFlag
+    debugFlag = "-d" in sys.argv
     
     # Read the contents of the file
     with open(filePath, "rb") as file:
