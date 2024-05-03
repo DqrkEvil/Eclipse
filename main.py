@@ -3,7 +3,6 @@ import random
 import sys
 from pathlib import Path
 
-import src.obfuscation.checksum as check
 import src.obfuscation.compress as cmp
 import src.obfuscation.encode as encode
 
