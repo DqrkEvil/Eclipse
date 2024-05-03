@@ -162,4 +162,5 @@ cython_debug/
 RunVSCode.bat
 protectedFile.py
 HelloWorld.py
-tempFile*.py
+debugFile*.py
+output/
