@@ -51,10 +51,7 @@ def main():
         fileContents = file.read()
     
     # Convert from bytes to string 
-    fileContents = fileContents.decode("utf-8")
-    
-    # Encode contents into single line
-    fileContents = encode.b64Encoding(fileContents)     
+    fileContents = fileContents.decode("utf-8")   
     
     # Randomising and applying protection methods
     protectionMethods = [
@@ -74,6 +71,8 @@ def main():
     with open(f"output/{fileName}_Obfuscated.py", "w") as protectedFile:
         protectedFile.write(fileContents)
         protectedFile.truncate()        
+    
+    print("Success! Obfuscated file can be found in the 'output' folder.")
             
 if __name__ == "__main__":
     main()
